@@ -1,6 +1,6 @@
 import React from 'react';
 //import PropTypes from 'prop-types';
-//import styles from './CovidDetails.module.scss';
+import styles from './CovidDetails.module.scss';
 
   // const CovidDetails = () => (
   //   <div className={styles.CovidDetails}>
@@ -21,6 +21,7 @@ class CovidDetails extends React.Component{
       // },
       CovidRecordList: []
     }
+    
     this.OnSubmit = this.OnSubmit.bind(this);
     this.HandleChange = this.HandleChange.bind(this);
     this.ManageCovidStatus = this.ManageCovidStatus.bind(this);
@@ -32,6 +33,7 @@ class CovidDetails extends React.Component{
       FullName: this.state.FirstName + this.state.LastName,
       Age: this.state.Age,
       CovidStatus: this.state.Covid_Status,
+      BodyTemperature: this.state.BodyTemperature,
       AssessmentCount: this.GetAssessmentCount(e)
     })
     this.setState({["FirstName"] : '', ["LastName"]: ''});
@@ -90,9 +92,9 @@ class CovidDetails extends React.Component{
         <div>
           <label>Body Temperature:</label>
           <input type="number" className="" name="BodyTemperature" value={this.state.BodyTemperature} onChange={this.HandleChange}/>
-          <view>
+          {/* <view> */}
               {this.state.BodyTemperature ? (this.state.BodyTemperature > 100 ? <label>Corona Go</label> : <label>No Corona</label>) : null}
-            </view>
+            {/* </view> */}
         </div>
         <br />
         <div>
@@ -103,10 +105,30 @@ class CovidDetails extends React.Component{
         <div><button onClick={this.OnSubmit}>Submit</button></div>
         
       {/* </form> */}
-      {/* for (let index = 0; index < this.state.CovidRecordList.length; index++) {
-        const element = array[index];
-        
-      } */}
+      <table>
+      <thead>
+        <tr>
+          <th>#</th>
+          <th>AssessmentCount</th>
+          <th>Full Name</th>
+          <th>Age</th>
+          <th>Body Temperature</th>
+          <th>Covid Status </th>
+        </tr>
+      </thead>
+      <tbody>
+      {
+        this.state.CovidRecordList.map((eachRow,i)=>(
+          <tr key={i}>
+          {
+            <><td>{i + 1}</td><td>{eachRow.AssessmentCount}</td><td>{eachRow.FullName}</td><td>{eachRow.Age}</td><td>{eachRow.BodyTemperature}</td>
+            <td>{eachRow.CovidStatus}</td></>
+          }
+          </tr>
+        ))
+      } 
+      </tbody>
+      </table>
     </div>;
     
   }

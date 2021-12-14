@@ -1,0 +1,11 @@
+table, th, td{
+    border: 1px solid turquoise;
+}
+
+th, td{
+    border-radius: 10px;
+}
+td:hover{
+    background-color: yellow;
+    color: turquoise;
+}
